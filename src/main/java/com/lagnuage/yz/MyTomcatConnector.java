@@ -1,5 +1,9 @@
 package com.lagnuage.yz;
 
+import com.lagnuage.yz.entity.MyHttpRequest;
+import com.lagnuage.yz.entity.MyHttpResponse;
+import com.lagnuage.yz.service.MyHttpRequestConverter;
+import com.lagnuage.yz.service.impl.MyHttpRequestConverterImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,9 +67,12 @@ public class MyTomcatConnector {
                     String requestString = str.toString();
                     String[] lines = requestString.split("\n");
                     String resource = lines[0].substring(lines[0].indexOf('/'),lines[0].lastIndexOf('/') - 5);
-//                    HttpServletRequest httpServletRequest = convert(lines);
-//getServlet(resource).doservice();
 
+                    MyHttpRequestConverter myHttpRequestConverter = new MyHttpRequestConverterImpl();
+                    MyHttpRequest myHttpRequest = myHttpRequestConverter.httpRequestConvert(resource, lines);
+                    MyHttpResponse myHttpResponse = new MyHttpResponse();
+
+                    //this part should be put into the HttpResponseConverter part
                     System.out.println(Thread.currentThread().getName()+" : start to send back msg");
                     ByteBuffer byteBuffer2 = ByteBuffer.allocate(1024);
                     String reply = "HTTP/1.1\n"; // 必须添加的响应头
