@@ -72,6 +72,8 @@ public class MyTomcatConnector {
                     MyHttpRequest myHttpRequest = myHttpRequestConverter.httpRequestConvert(resource, lines);
                     MyHttpResponse myHttpResponse = new MyHttpResponse();
 
+                    MyTomcatContainer.getInstance().doService(myHttpRequest, myHttpResponse);
+
                     //this part should be put into the HttpResponseConverter part
                     System.out.println(Thread.currentThread().getName()+" : start to send back msg");
                     ByteBuffer byteBuffer2 = ByteBuffer.allocate(1024);
