@@ -1,5 +1,7 @@
 package com.lagnuage.yz;
 
+import java.io.IOException;
+
 /**
  * Hello world!
  *
@@ -7,6 +9,6 @@ package com.lagnuage.yz;
 public class App 
 {
     public static void main( String[] args ) {
-        System.out.println( "Hello World!" );
+        new MyTomcatConnector().start();
     }
 }
